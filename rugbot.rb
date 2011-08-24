@@ -67,10 +67,10 @@ on :channel, /dywj/i do
   msg channel, "DAMN YOU WILL JESSOP!!!"
 end
 
-on :channel, /^roll$/i do
+on :channel, /^roll ([0-9]*)$/i do |sides|
   log_user_seen(nick)
-
-  msg channel, "#{nick} rolls a six sided die and gets #{rand(6) +1}"
+  sides = 6 unless sides
+  msg channel, "#{nick} rolls a #{sides} sided die and gets #{rand(sides) +1}"
 end
 
 on :channel, /ACTION(.*)pokes #{Regexp.escape(BOT_NAME)}/i do
@@ -131,7 +131,7 @@ end
 
 on :channel, /^stab (.*?)$/i do |user|
   log_user_seen(nick)
-  user = nick if %w(rugbot self yourself).include?(user) || nick[/djgraham/]
+  user = nick if %w(rugbot self yourself).include?(user)
 
   action channel, "stabs #{user}"
 end

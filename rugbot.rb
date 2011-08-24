@@ -260,9 +260,9 @@ on :channel, /who broke [Rr]ugbot/i do
 
   begin
     body = JSON.parse(Curl::Easy.perform(url).body_str)
-    author = body.commit.author.name
-    date = DateTime.parse(body.commit.author.date).strftime("%e %b %Y %H:%m")
-    message = body.commit.message
+    author = body['commit']['author']['name']
+    date = DateTime.parse(body['commit']['author']['date']).strftime("%e %b %Y %H:%m")
+    message = body['commit']['message']
     msg channel, "#{author} broke me on #{date} with '#{message}'"
   rescue StandardError => e
     puts "Bugger! Couldn't find out who broke me: #{e}"

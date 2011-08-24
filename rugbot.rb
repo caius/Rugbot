@@ -8,6 +8,7 @@ Bundler.require :default
 require File.expand_path("rugbot_helper", File.dirname(__FILE__))
 
 BOT_NAME = 'rugbot'
+BOT_REPO = 'caius/Rugbot'
 SEEN_LIST = {}
 IMGUR_API_KEY = "4cdab1b0d1c8831232d477302a981363"
 
@@ -250,6 +251,23 @@ on :channel, /(https?:\/\/\S+)/i do |url|
     msg channel, "#{title.gsub(/\s+/m, " ").strip}"
   rescue StandardError => e
     puts "general http link got error: #{e}"
+  end
+end
+
+on :channel, /who broke [Rr]ugbot/i do
+  log_user_seen(nick)
+  url = "https://api.github.com/repos/#{BOT_REPO}/commits?per_page=1"
+
+  begin
+    body = JSON.parse(Curl::Easy.perform(url).body_str)
+    author = body.commit.author.name
+    date = DateTime.parse(body.commit.author.date).strftime("%e %b %Y %H:%m")
+    message = body.commit.message
+    msg channel, "#{author} broke me on #{date} with '#{message}'"
+  rescue StandardError => e
+    puts "Bugger! Couldn't find out who broke me: #{e}"
+    msg channel, "Couldn't find who to blame, so... I'm blaming"
+    action channel, "points at #{SEEN_LIST.keys.shuffle.first}"
   end
 end
 

@@ -41,7 +41,7 @@ on :channel, /^stats?$/ do
 end
 
 on :channel, /^last ?(\w*)$/ do |username|
-  username ||= nick
+  username = nick if username.length == 0
   if (( n = LAST_FM_USERNAME_MAP.each {|match, name| break(name) if (match.is_a?(Regexp) ? username[match] : username == match) } ))
     username = n
   end

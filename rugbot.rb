@@ -307,7 +307,7 @@ end
 on :channel, /who broke rugbot/i do
   log_user_seen(nick)
   
-  msg channel, "tomb broke me"
+  msg channel, "do I look broke? >:("
 =begin
   url = "https://api.github.com/repos/#{BOT_REPO}/commits?per_page=1"
 
@@ -323,6 +323,21 @@ on :channel, /who broke rugbot/i do
     action channel, "points at #{SEEN_LIST.keys.shuffle.first}"
   end
 =end
+end
+
+on :channel, /hubstatus/i do
+  log_user_seen(nick)
+
+  real = JSON.parse(Curl::Easy.perform('http://status.github.com/realtime.json').body_str)
+  status = JSON.parse(Curl::Easy.perform('http://status.github.com/status.json').body_str)
+
+  status = status['status']
+  last   = status['last_updated']
+  pages  = real['pages'] ? 'Up' : 'Down'
+  git    = real['git'] ? 'Up' : 'Down'
+  dl     = real['downloads'] ? 'Up' : 'Down'
+
+  msg channel, "GitHub status: #{status} (Pages: #{pages}, Git: #{git}, Downloads: #{dl}) - #{last_updated}"
 end
 
 # Catchall for seen

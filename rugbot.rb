@@ -337,7 +337,7 @@ on :channel, /hubstatus/i do
   git    = real['git'] ? 'Up' : 'Down'
   dl     = real['downloads'] ? 'Up' : 'Down'
 
-  msg channel, "GitHub status: #{status} (Pages: #{pages}, Git: #{git}, Downloads: #{dl}) - #{last_updated}"
+  msg channel, "GitHub status: #{status} (Pages: #{pages}, Git: #{git}, Downloads: #{dl}) - #{last}"
 end
 
 # Catchall for seen

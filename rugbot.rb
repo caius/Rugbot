@@ -313,7 +313,7 @@ on :channel, /^commit me (\w+)\/(\w+)/i do |user, proj|
     author = commit["author"]["name"]
     date = DateTime.parse(commit["author"]["date"]).strftime("%e %b %Y at %H:%m")
     message = commit["message"]
-    msg channel, "#{author} broke me on #{date} with '#{message}'"
+    msg channel, "#{author} commited'#{message}' on #{date}"
   rescue StandardError => e
     msg channel, "Couldn't find commits for: #{user}/#{proj}"
   end

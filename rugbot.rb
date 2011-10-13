@@ -15,7 +15,8 @@ LAST_FM_USERNAME_MAP = {
   /caius/i   => "CaiusD",
   "tomb"     => "tom0bell",
   "djgraham" => "davidistesting",
-  "j`ey"     => "cardologist"
+  "j`ey"     => "cardologist",
+  "adamholt" => "omgitsads"
 }
 TASCHE = /(?:mus)?tas?ch(?:e|ify)/
 

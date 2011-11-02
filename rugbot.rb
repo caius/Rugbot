@@ -45,7 +45,7 @@ on :channel, /^stats?$/ do
   msg channel, "http://dev.hentan.eu/irc/nwrug.html"
 end
 
-on :channel, /^last(?:\s+(.*))?$/ do |username|
+on :channel, /^last(?:\s+(\w+)?)?$/i do |username|
   # Default to the user's nick
   username = nick if username == nil || username == ""
 

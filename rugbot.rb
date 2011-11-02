@@ -115,6 +115,10 @@ on :channel, /^roll ([0-9]*)$/i do |sides|
   msg channel, "#{nick} rolls a #{sides} sided die and gets #{rand(sides) +1}"
 end
 
+on :channel, /F{2,}U{2,}/ do
+  msg channel, "Calm down #{nick}!"
+end
+
 on :channel, /ACTION(.*)pokes #{Regexp.escape(BOT_NAME)}/i do
   log_user_seen(nick)
 

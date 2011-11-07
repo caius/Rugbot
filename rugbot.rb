@@ -116,7 +116,12 @@ on :channel, /^roll ([0-9]*)$/i do |sides|
 end
 
 on :channel, /F{2,}U{2,}/ do
-  msg channel, "Calm down #{nick}!"
+  str = if nick[/tomb/i]
+    "http://no.gd/p/calm-20111107-115310.jpg"
+  else
+    "Calm down #{nick}!"
+  end
+  msg channel, str
 end
 
 on :channel, /ACTION(.*)pokes #{Regexp.escape(BOT_NAME)}/i do

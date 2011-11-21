@@ -249,6 +249,26 @@ on :channel, /^uptime\s*$/i do
   msg channel, "#{nick}: I've been running for #{(Time.now - start_time).to_time_length}"
 end
 
+# searches twitter for the user's last poopin status
+# will_j last poop
+# => will_j last pooped 4 days, 0 hours, 38 mins and 11 secs ago:  'Poopin'
+# hours of fun
+on :channel, /^\s*(\S+) last poop/ do |user|
+  log_user_seen(nick)
+  begin
+    search = Twitter::Search.new
+    r = search.containing("poopin").from(user).result_type("recent").per_page(1).first
+    if r
+      time_diff = (Time.now - Time.parse(r.created_at)).to_time_length
+      msg channel, "#{r.from_user} last pooped #{time_diff} ago:  '#{r.text}'"
+    else
+      msg channel, "#{user} doesn't seem to have pooped"
+    end
+  rescue => boom
+    puts "Caught [last poop] #{boom.inspect}"
+  end
+end
+
 # http://twitter.com/stealthygecko/status/20892091689
 # http://twitter.com/#!/stealthygecko/status/20892091689
 # And https | trailing /

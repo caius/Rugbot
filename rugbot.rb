@@ -364,6 +364,11 @@ on :channel, /hubstatus/i do
   msg channel, "GitHub status: #{status} (Pages: #{pages}, Git: #{git}, Downloads: #{dl}) - #{last}"
 end
 
+on :channel, /where is (wlll|will)/i do
+  places = [ 'North Tea Power', 'home' ]
+  msg channel, "wlll is at #{places.shuffle.first}"
+end
+
 # Catchall for seen
 on :channel, /.*/ do
   log_user_seen(nick)

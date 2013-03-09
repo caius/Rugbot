@@ -3,7 +3,7 @@ GEM
   specs:
     addressable (2.2.2)
     crack (0.1.8)
-    curb (0.7.9)
+    curb (0.8.3)
     faraday (0.5.3)
       addressable (~> 2.2.2)
       multipart-post (~> 1.0.1)

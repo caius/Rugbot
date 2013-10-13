@@ -42,7 +42,7 @@ on :channel, /^(?:\.|!?\.?ping)$/ do
 end
 
 on :channel, /^stats?$/ do
-  msg channel, "http://dev.hentan.eu/irc/nwrug.html"
+  msg channel, "http://dev.hentan.caius.name/irc/nwrug.html"
 end
 
 on :channel, /^last(?:\s+(\w+)?)?$/i do |username|
